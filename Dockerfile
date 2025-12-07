@@ -2,9 +2,9 @@
 FROM maven:3.9.4 AS build
 WORKDIR /app
 
-# copy only pom first to cache dependencies
+# copy only pom first to cache dependencies and download dependencies (do not build yet)
 COPY pom.xml .
-RUN mvn -B verify -DskipTests
+RUN mvn -B -DskipTests dependency:go-offline
 
 # copy source and build
 COPY src ./src
