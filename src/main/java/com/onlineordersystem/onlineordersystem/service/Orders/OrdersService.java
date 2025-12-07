@@ -7,5 +7,5 @@ import com.onlineordersystem.onlineordersystem.entity.Order;
 public interface OrdersService {
     public List<Order> getAllPendingOrders();
     public Order getOrder(int orderId);
-    public String addOrders();
+    public String addOrders(List<Order> orders);
 }

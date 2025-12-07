@@ -26,7 +26,7 @@ public class OrdersServiceImpl implements OrdersService {
     }
 
     @Override
-    public String addOrders() {
+    public String addOrders(List<Order> orders) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addOrders'");
     }

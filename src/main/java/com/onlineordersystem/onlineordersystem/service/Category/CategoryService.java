@@ -11,7 +11,7 @@ public interface CategoryService {
 
     public String addCategory(List<Category> category);
 
-    public String updateCategory(int categoryId);
+    public String updateCategory(int categoryId,Category category);
 
     public String deleteCategory(int categoryId);
 
