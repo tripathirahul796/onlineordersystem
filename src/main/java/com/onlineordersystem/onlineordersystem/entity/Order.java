@@ -32,8 +32,7 @@ public class Order {
     @Column
     private Date lastUpDate;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "productId")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Product> products;
 
     @ManyToOne(cascade = CascadeType.ALL)
