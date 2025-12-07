@@ -1,5 +1,5 @@
 # build stage (Maven + JDK)
-FROM maven:3.9.4-eclipse-temurin-18 AS build
+FROM maven:3.9.4 AS build
 WORKDIR /app
 
 # copy only pom first to cache dependencies
