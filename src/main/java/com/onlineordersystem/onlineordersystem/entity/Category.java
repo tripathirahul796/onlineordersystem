@@ -2,17 +2,18 @@ package com.onlineordersystem.onlineordersystem.entity;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name ="Category")
 public class Category {
    
     @Id
@@ -31,8 +32,8 @@ public class Category {
     @JoinColumn(name = "categoryId", referencedColumnName = "productId")
     private Product product;
     */
-    @OneToOne(mappedBy = "category")
-    private Product product;
+    @OneToMany(mappedBy = "category")
+    private List<Product> product;
     
     public Category() {
     }
