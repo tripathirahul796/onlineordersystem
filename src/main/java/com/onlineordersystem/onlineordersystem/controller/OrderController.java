@@ -19,8 +19,8 @@ public class OrderController {
     OrdersService ordersService;
 
     @GetMapping("/add")
-    public String addOrders() {
-        ordersService.addOrders();
+    public String addOrders(List<Order> orders) {
+        ordersService.addOrders(orders);
         return "Successfully added !!";
     }
 
