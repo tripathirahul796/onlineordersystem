@@ -10,11 +10,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table (name = "Products")
 public class Product {
 
     @Id
@@ -38,11 +38,11 @@ public class Product {
     private Category category;
     */
 
-    @OneToOne(mappedBy = "products")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Order order;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoryId")
     private Category category;
 
     public Product() {

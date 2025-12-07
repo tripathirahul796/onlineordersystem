@@ -2,6 +2,7 @@ package com.onlineordersystem.onlineordersystem.entity;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,7 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,12 +32,12 @@ public class Order {
     @Column
     private Date lastUpDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "productId", referencedColumnName = "productId")
-    private Product products;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "productId")
+    private List<Product> products;
 
-    @OneToOne(mappedBy = "orders")
-    //@JoinColumn(name = "mobileNumber", referencedColumnName = "orderId")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "mobileNumber")
     private Customer customer;
 
 

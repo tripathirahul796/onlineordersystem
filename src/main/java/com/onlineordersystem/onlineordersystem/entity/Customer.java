@@ -1,17 +1,18 @@
 package com.onlineordersystem.onlineordersystem.entity;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table (name = "Customer")
 public class Customer {
     @Column
     private String userName;
@@ -23,9 +24,9 @@ public class Customer {
     @Column
     private Date lastUpdate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "orderId", referencedColumnName = "orderId")
-    private Order orders;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "orderId", referencedColumnName = "mobileNumber")
+    private List<Order> orders;
 
     
     public Customer() {
