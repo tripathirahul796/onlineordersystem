@@ -7,16 +7,21 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class QRCodeGenerator {
+
+    @Value("${qrImgDir}")
+    private String imgDir;
 
     public void generateQRCode(String data, int tableNum) throws IOException, WriterException {
         int width = 300;
@@ -27,8 +32,9 @@ public class QRCodeGenerator {
 
         BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, width, height, hints);
 
-        Path path = FileSystems.getDefault().getPath(filePath);
+        Path path = FileSystems.getDefault().getPath(imgDir+ File.separator+ filePath);
         MatrixToImageWriter.writeToPath(matrix, "PNG", path);
+      
     }
 }
 
