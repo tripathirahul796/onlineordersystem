@@ -101,11 +101,11 @@ public class Order {
         this.lastUpDate = lastUpDate;
     }
 
-    public Product getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Product products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
