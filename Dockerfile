@@ -1,16 +1,21 @@
-FROM ubuntu:latest AS build
+# build stage (Maven + JDK)
+FROM maven:3.9.4-eclipse-temurin-18 AS build
+WORKDIR /app
 
-RUN apt-get update
-RUN apt-get install openjdk-18-jdk -y
-COPY . .
+# copy only pom first to cache dependencies
+COPY pom.xml .
+RUN mvn -B verify -DskipTests
 
-RUN apt-get install maven -y
-RUN mvn clean install 
+# copy source and build
+COPY src ./src
+RUN mvn -B package -DskipTests
 
-FROM openjdk:18-jdk-slim
-
+# runtime stage using Azul Zulu JDK 18
+FROM azul/zulu-openjdk:18
+WORKDIR /app
 EXPOSE 8080
 
-COPY --from=build /target/onlineorderapp.jar app.jar
+# adjust path to the produced jar if its name differs
+COPY --from=build /app/target/*.jar app.jar
 
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+ENTRYPOINT ["java","-jar","app.jar"]
